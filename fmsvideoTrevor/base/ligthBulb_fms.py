@@ -57,4 +57,7 @@ class Char(object):
 
 if __name__ == "__main__":
     light = Char()
-    #light.FSM.state["On"] = LightOn()
+    
+    light.FSM.states["On"] = LightOn()
+    light.FSM.states["Off"] = LightOff()
+    
