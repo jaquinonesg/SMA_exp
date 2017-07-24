@@ -56,8 +56,27 @@ class Char(object):
 #===================================
 
 if __name__ == "__main__":
+    print("here")
     light = Char()
     
-    light.FSM.states["On"] = LightOn()
+    light.FSM.states["On"] = LigthOn()
     light.FSM.states["Off"] = LightOff()
-    
+    light.FSM.transitions["toOn"] = Transition("On")
+    light.FSM.transitions["toOff"] = Transition("Off")
+
+    light.FSM.SetState("On")
+
+    for i in range(20):
+        startTime = clock()
+        timeInterval = 1
+        while(startTime + timeInterval > clock()):
+            pass
+        if(randint(0,2)):
+            if(light.LightOn):
+                light.FSM.Transition("toOff")
+                light.LightOn = False
+            else:
+                light.FSM.Transition("toOn")
+                light.LightOn = True
+        light.FSM.Execute()
+                
