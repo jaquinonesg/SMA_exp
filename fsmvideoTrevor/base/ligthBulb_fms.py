@@ -56,7 +56,6 @@ class Char(object):
 #===================================
 
 if __name__ == "__main__":
-    print("here")
     light = Char()
     
     light.FSM.states["On"] = LigthOn()
