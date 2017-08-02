@@ -2,8 +2,8 @@
 # State Machine pattern using 'if' statements
 # to determine the next state.
 import string, sys
-sys.path += ['../stateMachine', '../mouse']
-from State import State
+sys.path += ['../StateMachine', '../mouse']
+#from State import State
 from StateMachine import StateMachine
 from MouseAction import MouseAction
 # A different subclass for each state:
