@@ -17,3 +17,4 @@ machine = Machine(lump, states=['A', 'B', 'C'], transitions=transitions, initial
 
 lump.state
 lump.passA()
+print(machine.get_state(lump.state).name)
