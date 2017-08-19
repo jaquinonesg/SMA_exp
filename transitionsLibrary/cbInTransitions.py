@@ -7,10 +7,11 @@ class Matter(object):
 states = ['solid','liquid','gas']
 
 transitions = [
-    { 'trigger': 'melt', 'source': 'solid', 'dest': 'liquid', 'before': 'make_hissing_noises'},
+    { 'trigger': 'melt', 'source': 'solid', 'dest': 'liquid', 'before': 'make_hissing_noises','after': 'disappear'},
     { 'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas', 'after': 'disappear' }
 ]
 
 lump = Matter()
 machine = Machine(lump, states, transitions=transitions, initial='solid')
 lump.melt()
+lump.evaporate()
