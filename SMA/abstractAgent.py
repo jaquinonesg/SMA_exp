@@ -11,10 +11,19 @@ class AbstractAgent(object):
         ''' '''
         self.id = random.random()
         self.name = AbstractAgent.__name__
+        self.name = AbstractAgent.__name__
         self.description = description
         self.community_id = community_id
 
-    def move(self,  path='/Users/juanpablo/PycharmProjects/agent.TLON', nameFile):
+    def move(self, nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON', Type=1):
+        '''Move agente to another point in network'''
+        '''Type parameter allow the agent to move in diferente ways: 0 = Clone, 1 = Disperse, 2 = Migrate '''
+
+        options = { 0 : clone,
+                    1 : disperse,
+                    2 : migrate }
+        options[Type]()
+
         name = 'MouseTrap6'
         file = open('nameFile' + '.py', 'r')
         agent_code = file.read()
@@ -36,6 +45,19 @@ class AbstractAgent(object):
         print("received data:", data)
         print('Connection close')
         s.close
+
+    def clone(self):
+        '''cloning'''
+        pass
+    
+    def disperse(self):
+        '''dispersing'''
+        pass
+
+    def migrate(self):
+        '''clonning'''
+        pass
+
 
     def state_diagram(self):
         ''' printStateDiagram '''
