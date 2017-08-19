@@ -14,10 +14,29 @@ class AbstractAgent(object):
         self.description = description
         self.community_id = community_id
 
-    def mobility(self):
-        ''' mobility '''
-        pass
-    
+    def move(self,  path='/Users/juanpablo/PycharmProjects/agent.TLON', nameFile):
+        name = 'MouseTrap6'
+        file = open('nameFile' + '.py', 'r')
+        agent_code = file.read()
+        file.close()
+
+        s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        # host = ('fe80::ba27:ebff:fea1:5493%bridge100', 12345, 0, 5)
+        host = ('fe80::38c9:86ff:fea1:3c64', 12345, 0, 5)
+        port = 12345
+
+        message = ('_clone_', path + '/' + name + '.py', agent_code)
+        m = json.dumps(message).encode('utf8')
+
+        print('request : %s to %s' % (message[0], host))
+        s.connect(host)
+        print('Sending data')
+        s.sendall(m)
+        data = json.loads(s.recv(16382).decode('utf8'), strict=False)
+        print("received data:", data)
+        print('Connection close')
+        s.close
+
     def state_diagram(self):
         ''' printStateDiagram '''
         pass
@@ -34,66 +53,4 @@ class AbstractAgent(object):
         ''' handling '''
         pass
 
-
-
-class NarcolepticSuperhero(object):
-
-    # Define some states. Most of the time, narcoleptic superheroes are just like
-    # everyone else. Except for...
-    states = ['asleep', 'hanging out', 'hungry', 'sweaty', 'saving the world']
-
-    def __init__(self, name):
-
-        # No anonymous superheroes on my watch! Every narcoleptic superhero gets
-        # a name. Any name at all. SleepyMan. SlumberGirl. You get the idea.
-        self.name = name
-
-        # What have we accomplished today?
-        self.kittens_rescued = 0
-
-        # Initialize the state machine
-        self.machine = Machine(model=self, states=NarcolepticSuperhero.states, initial='asleep')
-
-        # Add some transitions. We could also define these using a static list of
-        # dictionaries, as we did with states above, and then pass the list to
-        # the Machine initializer as the transitions= argument.
-
-        # At some point, every superhero must rise and shine.
-        self.machine.add_transition(trigger='wake_up', source='asleep', dest='hanging out')
-
-        # Superheroes need to keep in shape.
-        self.machine.add_transition('work_out', 'hanging out', 'hungry')
-
-        # Those calories won't replenish themselves!
-        self.machine.add_transition('eat', 'hungry', 'hanging out')
-
-        # Superheroes are always on call. ALWAYS. But they're not always
-        # dressed in work-appropriate clothing.
-        self.machine.add_transition('distress_call', '*', 'saving the world',
-                         before='change_into_super_secret_costume')
-
-        # When they get off work, they're all sweaty and disgusting. But before
-        # they do anything else, they have to meticulously log their latest
-        # escapades. Because the legal department says so.
-        self.machine.add_transition('complete_mission', 'saving the world', 'sweaty',
-                         after='update_journal')
-
-        # Sweat is a disorder that can be remedied with water.
-        # Unless you've had a particularly long day, in which case... bed time!
-        self.machine.add_transition('clean_up', 'sweaty', 'asleep', conditions=['is_exhausted'])
-        self.machine.add_transition('clean_up', 'sweaty', 'hanging out')
-
-        # Our NarcolepticSuperhero can fall asleep at pretty much any time.
-        self.machine.add_transition('nap', '*', 'asleep')
-
-    def update_journal(self):
-        """ Dear Diary, today I saved Mr. Whiskers. Again. """
-        self.kittens_rescued += 1
-
-    def is_exhausted(self):
-        """ Basically a coin toss. """
-        return random.random() < 0.5
-
-    def change_into_super_secret_costume(self):
-        print("Beauty, eh?")
 
