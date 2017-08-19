@@ -24,38 +24,41 @@ class AbstractAgent(object):
                     2 : migrate }
         options[Type]()
 
-        name = 'MouseTrap6'
-        file = open('nameFile' + '.py', 'r')
-        agent_code = file.read()
-        file.close()
+        # name = 'MouseTrap6'
+        # file = open('nameFile' + '.py', 'r')
+        # agent_code = file.read()
+        # file.close()
 
-        s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
-        # host = ('fe80::ba27:ebff:fea1:5493%bridge100', 12345, 0, 5)
-        host = ('fe80::38c9:86ff:fea1:3c64', 12345, 0, 5)
-        port = 12345
+        # s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        # # host = ('fe80::ba27:ebff:fea1:5493%bridge100', 12345, 0, 5)
+        # host = ('fe80::38c9:86ff:fea1:3c64', 12345, 0, 5)
+        # port = 12345
 
-        message = ('_clone_', path + '/' + name + '.py', agent_code)
-        m = json.dumps(message).encode('utf8')
+        # message = ('_clone_', path + '/' + name + '.py', agent_code)
+        # m = json.dumps(message).encode('utf8')
 
-        print('request : %s to %s' % (message[0], host))
-        s.connect(host)
-        print('Sending data')
-        s.sendall(m)
-        data = json.loads(s.recv(16382).decode('utf8'), strict=False)
-        print("received data:", data)
-        print('Connection close')
-        s.close
+        # print('request : %s to %s' % (message[0], host))
+        # s.connect(host)
+        # print('Sending data')
+        # s.sendall(m)
+        # data = json.loads(s.recv(16382).decode('utf8'), strict=False)
+        # print("received data:", data)
+        # print('Connection close')
+        # s.close
 
     def clone(self):
         '''cloning'''
+        print('clonning')
         pass
     
     def disperse(self):
         '''dispersing'''
+        print('dispersing')
         pass
 
     def migrate(self):
-        '''clonning'''
+        '''migrating'''
+        print('migrating')
         pass
 
 
@@ -76,3 +79,5 @@ class AbstractAgent(object):
         pass
 
 
+a = AbstractAgent
+a.
