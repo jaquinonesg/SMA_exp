@@ -5,23 +5,33 @@ from transitions import Machine
 
 class AbstractAgent(object):
     '''Basic structure of an agent in SMA'''
-    states = []
 
-    def __init__(self, description, community_id):
+    def __init__(self,name='yy', description='xx', community_id='0'):
         ''' '''
-        self.id = random.random()
-        self.name = AbstractAgent.__name__
-        self.name = AbstractAgent.__name__
+        self.identifier = random.random()
+        self.name = name
         self.description = description
         self.community_id = community_id
+    
+    def clone(self):
+        '''cloning'''
+        print('clonning')
+    
+    def disperse(self):
+        '''dispersing'''
+        print('dispersing')
+
+    def migrate(self):
+        '''migrating'''
+        print('migrating')
 
     def move(self, nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON', Type=1):
         '''Move agente to another point in network'''
         '''Type parameter allow the agent to move in diferente ways: 0 = Clone, 1 = Disperse, 2 = Migrate '''
 
-        options = { 0 : clone,
-                    1 : disperse,
-                    2 : migrate }
+        options = { 0 : self.clone,
+                    1 : self.disperse,
+                    2 : self.migrate }
         options[Type]()
 
         # name = 'MouseTrap6'
@@ -46,21 +56,6 @@ class AbstractAgent(object):
         # print('Connection close')
         # s.close
 
-    def clone(self):
-        '''cloning'''
-        print('clonning')
-        pass
-    
-    def disperse(self):
-        '''dispersing'''
-        print('dispersing')
-        pass
-
-    def migrate(self):
-        '''migrating'''
-        print('migrating')
-        pass
-
 
     def state_diagram(self):
         ''' printStateDiagram '''
@@ -79,5 +74,10 @@ class AbstractAgent(object):
         pass
 
 
-a = AbstractAgent
-a.
+a = AbstractAgent('xx','dd','zz')
+a.move('c')
+print(a.name)
+
+b = AbstractAgent()
+b.move('c')
+print(b.name)
