@@ -1,15 +1,21 @@
-def thing_a(arg=None):
-    print ('thing_a', arg)
+from abstractAgent import *
 
-def thing_b(arg=None):
-    print ('thing_b', arg)
+class Matter(AbstractAgent):
+    def set_environment(self, temp=0, pressure=101.325):
+        self.temp = temp
+        self.pressure = pressure
+    def print_temperature(self): print("Current temperature is %d degrees celsius." % self.temp)
+    def print_pressure(self): print("Current pressure is %.2f kPa." % self.pressure)
 
-ghetto_switch_statement = {
-    'do_thing_a': thing_a,
-    'do_thing_b': thing_b
-}
 
-ghetto_switch_statement['do_thing_a']("It's lovely being an A")
-ghetto_switch_statement['do_thing_b']("Being a B isn't too shabby either")
+something = Matter("Estados de la materia", "Agente que muestra los cambios de la materia", 0)
 
-print ("Available methods are: ", ghetto_switch_statement.keys())
+states = ['liquid','solid','gas','plasma']
+
+transitions = [
+    {'trigger': 'melt', 'source': 'solid', 'dest': 'liquid'},
+    {'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas'},
+    {'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma'}
+]
+machine = Machine(Matter, states=states, transitions=transitions, initial='solid')
+print(Matter.state)

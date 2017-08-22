@@ -6,12 +6,18 @@ from transitions import Machine
 class AbstractAgent(object):
     '''Basic structure of an agent in SMA'''
 
-    def __init__(self,name='yy', description='xx', community_id='0'):
-        ''' '''
+    def __init__(self, name, description, community_id, father="Darth Vader"):
+        '''
+        identifier:
+        name:
+        description:
+        community_id:
+        '''
         self.identifier = random.random()
         self.name = name
         self.description = description
         self.community_id = community_id
+        self.father = father
     
     def clone(self):
         '''cloning'''
@@ -21,41 +27,38 @@ class AbstractAgent(object):
         '''dispersing'''
         print('dispersing')
 
-    def migrate(self):
+    def migrate(self, nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON'):
         '''migrating'''
-        print('migrating')
+        name = 'MouseTrap6'
+        file = open('nameFile' + '.py', 'r')
+        agent_code = file.read()
+        file.close()
 
-    def move(self, nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON', Type=1):
+        s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+        # host = ('fe80::ba27:ebff:fea1:5493%bridge100', 12345, 0, 5)
+        host = ('fe80::38c9:86ff:fea1:3c64', 12345, 0, 5)
+        port = 12345
+
+        message = ('_clone_', path + '/' + name + '.py', agent_code)
+        m = json.dumps(message).encode('utf8')
+
+        print('request : %s to %s' % (message[0], host))
+        s.connect(host)
+        print('Sending data')
+        s.sendall(m)
+        data = json.loads(s.recv(16382).decode('utf8'), strict=False)
+        print("received data:", data)
+        print('Connection close')
+        s.close
+
+    def move(self, nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON', Type=2):
         '''Move agente to another point in network'''
         '''Type parameter allow the agent to move in diferente ways: 0 = Clone, 1 = Disperse, 2 = Migrate '''
 
         options = { 0 : self.clone,
                     1 : self.disperse,
                     2 : self.migrate }
-        options[Type]()
-
-        # name = 'MouseTrap6'
-        # file = open('nameFile' + '.py', 'r')
-        # agent_code = file.read()
-        # file.close()
-
-        # s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
-        # # host = ('fe80::ba27:ebff:fea1:5493%bridge100', 12345, 0, 5)
-        # host = ('fe80::38c9:86ff:fea1:3c64', 12345, 0, 5)
-        # port = 12345
-
-        # message = ('_clone_', path + '/' + name + '.py', agent_code)
-        # m = json.dumps(message).encode('utf8')
-
-        # print('request : %s to %s' % (message[0], host))
-        # s.connect(host)
-        # print('Sending data')
-        # s.sendall(m)
-        # data = json.loads(s.recv(16382).decode('utf8'), strict=False)
-        # print("received data:", data)
-        # print('Connection close')
-        # s.close
-
+        options[Type](nameFile, path='/Users/juanpablo/PycharmProjects/agent.TLON')
 
     def state_diagram(self):
         ''' printStateDiagram '''
@@ -72,12 +75,3 @@ class AbstractAgent(object):
     def handling(self):
         ''' handling '''
         pass
-
-
-a = AbstractAgent('xx','dd','zz')
-a.move('c')
-print(a.name)
-
-b = AbstractAgent()
-b.move('c')
-print(b.name)
