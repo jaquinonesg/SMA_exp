@@ -13,9 +13,10 @@ something = Matter("Estados de la materia", "Agente que muestra los cambios de l
 states = ['liquid','solid','gas','plasma']
 
 transitions = [
-    {'trigger': 'melt', 'source': 'solid', 'dest': 'liquid'},
-    {'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas'},
-    {'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma'}
+    { 'trigger': 'melt', 'source': 'solid', 'dest': 'liquid' },
+    { 'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas' },
+    { 'trigger': 'sublimate', 'source': 'solid', 'dest': 'gas' },
+    { 'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma' }
 ]
 machine = Machine(Matter, states=states, transitions=transitions, initial='solid')
 print(Matter.state)
