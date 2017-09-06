@@ -1,4 +1,4 @@
-from transitions import Machine, State
+from transitionslib.core import *
 
 class Matter(object):
     pass
