@@ -1,4 +1,4 @@
-from transitions import Machine
+from transitionslib.core import Machine, State
 
 class Matter(object):
     def raise_error(self, event): raise ValueError("Oh no")
