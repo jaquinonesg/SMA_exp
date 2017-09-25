@@ -29,7 +29,7 @@ model = BetBase()
 machine = GraphMachine(model=model, 
                        states=states, 
                        transitions=transitions,
-                       initial='BaseBet',
+                       initial='CreateBet',
                        title="Bet",
                        show_conditions=True)
 model.show_graph()

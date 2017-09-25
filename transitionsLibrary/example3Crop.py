@@ -10,38 +10,30 @@ if cmd_folder not in sys.path:
 from transitions import *
 from transitions.extensions import GraphMachine
 
-class Matter(object):
-    def is_valid(self):
-        return True
-    
-    def is_not_valid(self):
-        return False
-    
-    def is_also_valid(self):
-        return True
-    
-    # graph object is created by the machine
+class Scrops(object):
+
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('xxx.png', prog='dot')
+        self.get_graph(**kwargs).draw('SCrops.png', prog='dot')
+
+states=['Inicio','TomarMedida','EnviarMedida','Terminar']
 
 transitions = [
-    { 'trigger': 'melt', 'source': 'solid', 'dest': 'liquid' },
-    { 'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas', 'conditions':'is_valid' },
-    { 'trigger': 'sublimate', 'source': 'solid', 'dest': 'gas', 'unless':'is_not_valid' },
-    { 'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma', 
-      'conditions':['is_valid','is_also_valid'] }
+    { 'trigger': 'ConfiguracionTerminada', 'source': 'Inicio', 'dest': 'TomarMedida' },
+    { 'trigger': 'ProcesadoConjunto', 'source': 'TomarMedida', 'dest': 'EnviarMedida' },
+    { 'trigger': 'Apagar', 'source': 'Inicio', 'dest': 'Terminar' },
+    { 'trigger': 'Apagar', 'source': 'Tomarmedida', 'dest': 'Terminar' },
+    { 'trigger': 'Apagar', 'source': 'EnviarMedida', 'dest': 'Terminar' },
+    { 'trigger': 'MedirDeNuevo', 'source': 'EnviarMedida', 'dest': 'TomarMedida' },
+    { 'trigger': 'ContinuarMidiendo', 'source': 'TomarMedida', 'dest': 'TomarMedida' }
 ]
-states=['solid', 'liquid', 'gas', 'plasma']
 
-model = Matter()
+model = Scrops()
 machine = GraphMachine(model=model, 
                        states=states, 
                        transitions=transitions,
-                       initial='solid',
+                       initial='Inicio',
                        show_auto_transitions=True, # default value is False
-                       title="Matter is Fun!",
+                       title="Agente",
                        show_conditions=True)
-model.melt()
-print(model.state)
 model.show_graph()
 
