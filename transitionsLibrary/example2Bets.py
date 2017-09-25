@@ -10,38 +10,27 @@ if cmd_folder not in sys.path:
 from transitions import *
 from transitions.extensions import GraphMachine
 
-class Matter(object):
-    def is_valid(self):
-        return True
-    
-    def is_not_valid(self):
-        return False
-    
-    def is_also_valid(self):
-        return True
+class BetBase(object):
     
     # graph object is created by the machine
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('xxx.png', prog='dot')
+        self.get_graph(**kwargs).draw('betBase.png', prog='dot')
 
+states=['CreateBet','OpenBet','BetOn','CloseBet','Paying','UpdateLists']
 transitions = [
-    { 'trigger': 'melt', 'source': 'solid', 'dest': 'liquid' },
-    { 'trigger': 'evaporate', 'source': 'liquid', 'dest': 'gas', 'conditions':'is_valid' },
-    { 'trigger': 'sublimate', 'source': 'solid', 'dest': 'gas', 'unless':'is_not_valid' },
-    { 'trigger': 'ionize', 'source': 'gas', 'dest': 'plasma', 
-      'conditions':['is_valid','is_also_valid'] }
+    { 'trigger': 'Configure', 'source': 'CreateBet', 'dest': 'OpenBet' },
+    { 'trigger': 'Public', 'source': 'OpenBet', 'dest': 'BetOn'},
+    { 'trigger': 'FinishTime', 'source': 'BetOn', 'dest': 'CloseBet' },
+    { 'trigger': 'ProcessPayment', 'source': 'CloseBet', 'dest': 'Paying' },
+    { 'trigger': 'ProcessResults', 'source': 'Paying', 'dest': 'UpdateLists' }
 ]
-states=['solid', 'liquid', 'gas', 'plasma']
 
-model = Matter()
+model = BetBase()
 machine = GraphMachine(model=model, 
                        states=states, 
                        transitions=transitions,
-                       initial='solid',
-                       show_auto_transitions=True, # default value is False
-                       title="Matter is Fun!",
+                       initial='BaseBet',
+                       title="Bet",
                        show_conditions=True)
-model.melt()
-print(model.state)
 model.show_graph()
 
