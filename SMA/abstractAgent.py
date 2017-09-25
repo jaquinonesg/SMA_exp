@@ -75,3 +75,6 @@ class AbstractAgent(object):
     def handling(self):
         ''' handling '''
         pass
+
+    def percieve(self, socket):
+        pass
