@@ -32,7 +32,7 @@ machine = GraphMachine(model=model,
                        states=states, 
                        transitions=transitions,
                        initial='Inicio',
-                       show_auto_transitions=True, # default value is False
+                       show_auto_transitions=False, # default value is False
                        title="Agente",
                        show_conditions=True)
 model.show_graph()
