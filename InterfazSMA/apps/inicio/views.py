@@ -10,10 +10,16 @@ def error_404(request):
 class Inicio(TemplateView):
     template_name = 'inicio/index.html'
 
+    class Perrito():
+        def __init__(self, num_patas):
+            self.num_patas= num_patas
+            print(num_patas)
+            
+
     def get(self, request):
         context = {
             'header': {
-                'title': 'Inicio',
+                'title': '',
                 'subtitle': '',
                 'breadcrumb': [
                     { 'name': 'Inicio' }
