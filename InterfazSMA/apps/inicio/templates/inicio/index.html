@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'inicio/styles.css' %}">
+{% endblock styles %}
+
+{% block title %}
+    Inicio
+{% endblock title %}
+
+{% block header_title %}
+    {% include 'layouts/header_title.html' %}
+{% endblock header_title %}
+
+{% block content %}
+    <div align="center">
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-file-text-o"></i> Contratación
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-money"></i> Presupuesto
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-bank"></i> Banco de proyecto
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-calendar-times-o"></i> Planeación
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-bank"></i> SISBEN
+        </a>
+        <a href="#" class="btn btn-app programas_sociales">
+            <i class="fa fa-ambulance"></i> Programas sociales
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-map-marker"></i> Localización predial
+        </a>
+        <a href="#" class="btn btn-app">
+            <i class="fa fa-group"></i> Usuarios
+        </a>
+
+        <br><br><br><br>
+
+        <div class="programas_sociales_lista" align="center">
+            <a href="#" class="btn btn-app">
+                <i class="fa  fa-pencil"></i> Educación
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-heartbeat"></i> Salud
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-home"></i> FONVIDA
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-thumbs-up"></i> Indigenas
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-users"></i> Afrodescendientes
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-venus"></i> Equidad de genero
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-transgender-alt"></i> Identidades de género diversas
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-fire-extinguisher"></i> Victimas
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-warning"></i> Discapacidad
+            </a>
+            <a href="#" class="btn btn-app">
+                <i class="fa fa-user-plus"></i> Adulto Mayor
+            </a>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'inicio/script.js' %}"></script>
+{% endblock %}

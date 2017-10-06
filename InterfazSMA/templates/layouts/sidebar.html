@@ -1,0 +1,155 @@
+{% load staticfiles %}
+
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar Menu --> 
+      <ul class="sidebar-menu">
+
+        {% if sidebar %}
+            {% for label in sidebar.labels %}
+                <li id="{{label.id}}" class="active">
+                    <a href="#">
+                        <i class="{{ label.class }}"></i>
+                        <span>{{label.name}}</span>
+                    </a>
+                    {% if label.sublabel %}
+                        <ul class="treeview-menu menu-open" style="overflow: hidden; display: block;">
+                            {% for sublabel in label.sublabel %}
+                                <li>
+                                    <a href="{{ sublabel.href }}">
+                                        <i class="{{ sublabel.class }}"></i>
+                                        {{ sublabel.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <ul class="treeview-menu menu-open" style="overflow: hidden; display: block;"> 
+          </ul>
+            {% endfor %}
+        {% else %}
+            <!-- Optionally, you can add icons to the links -->
+            <li class="active">
+                <a href="#">
+                    <i class="fa fa-file-text-o"></i>
+                    <span>Contratación</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-money"></i>
+                    <span>Presupuesto</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-bank"></i>
+                    <span>Banco de proyecto</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-calendar-times-o"></i>
+                    <span>Planeación</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-bank"></i>
+                    <span>SISBEN</span>
+                </a>
+            </li>
+
+            <li class="treeview">
+            <a href="#">
+             	<i class="fa fa-ambulance"></i>
+                <span>Programas sociales</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-down pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="overflow: hidden;">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-pencil"></i>
+                        Educación
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-heartbeat"></i>
+                        Salud
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        FONVIDA
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        Indigenas
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        Afrodescendientes
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-venus"></i>
+                        Mujeres y equidad de genero
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-transgender-alt"></i>
+                        Diversidad sexual e identidades de genero diversas
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-fire-extinguisher"></i>
+                        Víctimas
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-warning"></i>
+                        Discapacidad
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user-plus"></i>
+                        Adulto Mayor
+                    </a>
+                </li>
+            </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-map-marker"></i>
+                    <span>Localización predial</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+        {% endif %}
+
+        
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
