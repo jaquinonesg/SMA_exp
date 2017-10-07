@@ -32,31 +32,31 @@
         {% else %}
             <!-- Optionally, you can add icons to the links -->
             <li class="active">
-                <a href="#">
+                <a href="{% url 'inicio:ejemplos' %}">
                     <i class="fa fa-ambulance"></i>
                     <span>Ejemplos</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{% url 'inicio:agentes' %}">
                     <i class="fa fa-group"></i>
                     <span>Agentes</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{% url 'inicio:prog' %}">
                     <i class="fa fa-file-text-o"></i>
                     <span>Programación</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{% url 'inicio:404' %}">
                     <i class="fa fa-calendar-times-o"></i>
                     <span>La mejor parte</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{% url 'inicio:doc' %}">
                     <i class="fa fa-bank"></i>
                     <span>Documentación</span>
                 </a>
