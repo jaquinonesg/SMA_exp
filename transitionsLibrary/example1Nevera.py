@@ -14,7 +14,7 @@ class Fridge(object):
     
     # graph object is created by the machine
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('matter.png', prog='dot')
+        self.get_graph(**kwargs).draw('fridge.png', prog='dot')
 
 transitions = [
     { 'trigger': 'high_temperature', 'source': 'turn_off', 'dest': 'turn_on' },

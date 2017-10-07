@@ -50,3 +50,7 @@ print("b")
 b = Cheese(2)
 print("c")
 c = Cheese.random(10,"zzz","xxx")
+
+z = []
+if not z:
+    print("vacia")

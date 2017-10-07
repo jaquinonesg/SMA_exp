@@ -10,27 +10,40 @@ if cmd_folder not in sys.path:
 from transitions import *
 from transitions.extensions import GraphMachine
 
-class BetBase(object):
+class Dealer(object):
     
-    # graph object is created by the machine
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Dealer.png', prog='dot')
+
+class Apertura(object):
+    
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Apertura_Apuestas.png', prog='dot')
+
+class Cierre(object):
+    
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Cierre_Apuestas.png', prog='dot')
+
+class Paga(object):
+    
     def show_graph(self, **kwargs):
         self.get_graph(**kwargs).draw('betBase.png', prog='dot')
 
-states=['CreateBet','OpenBet','BetOn','CloseBet','Paying','UpdateLists']
-transitions = [
-    { 'trigger': 'Configure', 'source': 'CreateBet', 'dest': 'OpenBet' },
-    { 'trigger': 'Public', 'source': 'OpenBet', 'dest': 'BetOn'},
-    { 'trigger': 'FinishTime', 'source': 'BetOn', 'dest': 'CloseBet' },
-    { 'trigger': 'ProcessPayment', 'source': 'CloseBet', 'dest': 'Paying' },
-    { 'trigger': 'ProcessResults', 'source': 'Paying', 'dest': 'UpdateLists' }
-]
 
-model = BetBase()
-machine = GraphMachine(model=model, 
-                       states=states, 
-                       transitions=transitions,
-                       initial='CreateBet',
-                       title="Bet",
+statesDealer=['Configuracion','ConsultarWS','CreacionApuesta']
+transitionsDealer = [
+    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
+    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
+    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
+    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+]
+dealer1 = Dealer()
+machine1 = GraphMachine(model=dealer1, 
+                       states=statesDealer, 
+                       transitions=transitionsDealer,
+                       initial=statesDealer[0],
+                       title="Agente Dealer",
                        show_conditions=True)
-model.show_graph()
+dealer1.show_graph()
 

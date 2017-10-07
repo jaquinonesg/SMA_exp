@@ -13,7 +13,7 @@ from transitions.extensions import GraphMachine
 class Scrops(object):
 
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('SCrops.png', prog='dot')
+        self.get_graph(**kwargs).draw('sCrops.png', prog='dot')
 
 states=['Inicio','TomarMedida','EnviarMedida','Terminar']
 
@@ -21,7 +21,7 @@ transitions = [
     { 'trigger': 'ConfiguracionTerminada', 'source': 'Inicio', 'dest': 'TomarMedida' },
     { 'trigger': 'ProcesadoConjunto', 'source': 'TomarMedida', 'dest': 'EnviarMedida' },
     { 'trigger': 'Apagar', 'source': 'Inicio', 'dest': 'Terminar' },
-    { 'trigger': 'Apagar', 'source': 'Tomarmedida', 'dest': 'Terminar' },
+    { 'trigger': 'Apagar', 'source': 'TomarMedida', 'dest': 'Terminar' },
     { 'trigger': 'Apagar', 'source': 'EnviarMedida', 'dest': 'Terminar' },
     { 'trigger': 'MedirDeNuevo', 'source': 'EnviarMedida', 'dest': 'TomarMedida' },
     { 'trigger': 'ContinuarMidiendo', 'source': 'TomarMedida', 'dest': 'TomarMedida' }
@@ -33,7 +33,7 @@ machine = GraphMachine(model=model,
                        transitions=transitions,
                        initial='Inicio',
                        show_auto_transitions=False, # default value is False
-                       title="Agente",
+                       title="Agente de medicion",
                        show_conditions=True)
 model.show_graph()
 
