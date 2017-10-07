@@ -28,8 +28,76 @@ class Inicio(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Inicio, self).get_context_data(**kwargs)
-        r = ReactiveFsm("perrito",2)
-        print (r)
+        #r = ReactiveFsm("perrito",2)
+        #print (r)
+        return context
+
+class Ejemplos(TemplateView):
+    template_name = 'inicio/ejemplos.html'
+    context = {
+        'header': {
+            'title': '',
+            'subtitle': '',
+            'breadcrumb': [
+                { 'name': 'Inicio' }
+            ],
+            'options': [],
+        }
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super(Ejemplos, self).get_context_data(**kwargs)
+        return context
+
+class View404(TemplateView):
+    template_name = 'inicio/404.html'
+    context = {
+        'header': {
+            'title': '',
+            'subtitle': '',
+            'breadcrumb': [
+                { 'name': 'Inicio' }
+            ],
+            'options': [],
+        }
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super(View404, self).get_context_data(**kwargs)
+        return context
+
+class Agentes(TemplateView):
+    template_name = 'inicio/agentes.html'
+    context = {
+        'header': {
+            'title': '',
+            'subtitle': '',
+            'breadcrumb': [
+                { 'name': 'Inicio' }
+            ],
+            'options': [],
+        }
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super(Agentes, self).get_context_data(**kwargs)
+        return context
+
+class Documentacion(TemplateView):
+    template_name = 'inicio/documentacion.html'
+    context = {
+        'header': {
+            'title': '',
+            'subtitle': '',
+            'breadcrumb': [
+                { 'name': 'Inicio' }
+            ],
+            'options': [],
+        }
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super(Documentacion, self).get_context_data(**kwargs)
         return context
 
 class Programacion(TemplateView):

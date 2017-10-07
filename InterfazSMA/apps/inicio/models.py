@@ -3,7 +3,7 @@ from django.db import models
 
 def agent_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/section_<name>/<filename>
-    return 'agente/agente_{0}/{1}'.format(instance.id, filename)
+    return 'agente/{0}'.format(filename)
 
 class Agente(models.Model):
     nombre = models.CharField(max_length=100)
