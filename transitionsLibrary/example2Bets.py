@@ -28,11 +28,11 @@ class Cierre(object):
 class Paga(object):
     
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('betBase.png', prog='dot')
+        self.get_graph(**kwargs).draw('Agente_Paga_Apuestas.png', prog='dot')
 
 
 statesDealer=['Configuracion','ConsultarWS','CreacionApuesta']
-statesApertura=['NuevasApuesta','PublicarConfigurar','AbrirApuesta']
+statesApertura=['NuevaApuesta','PublicarConfigurar','AbrirApuesta']
 statesCierre=['BuscarACierre','Actualizar','ComunicarJugadores']
 statesPaga=['Espera','Contabilidad','Paga']
 
@@ -49,16 +49,17 @@ transitionsApertura = [
     { 'trigger': 'EApuesta', 'source': 'NuevaApuesta', 'dest': 'NuevaApuesta' }
 ]
 transitionsCierre = [
-    { 'trigger': 'A', 'source': 'BuscarACierre', 'dest': 'Actualizar' },
-    { 'trigger': 'B', 'source': 'Actualizar', 'dest': 'ComunicarJugadores'},
-    { 'trigger': 'C', 'source': 'ComunicarJugadores', 'dest': 'ComunicarJugadores' },
-    { 'trigger': 'D', 'source': 'BuscarACierre', 'dest': 'BuscarACierre' }
+    { 'trigger': 'ApuestaPorCerrar', 'source': 'BuscarACierre', 'dest': 'Actualizar' },
+    { 'trigger': 'Consolidado', 'source': 'Actualizar', 'dest': 'ComunicarJugadores'},
+    { 'trigger': 'EnCola', 'source': 'ComunicarJugadores', 'dest': 'ComunicarJugadores' },
+    { 'trigger': 'NadaNuevo', 'source': 'BuscarACierre', 'dest': 'BuscarACierre' }
 ]
 transitionsPaga = [
-    { 'trigger': 'A', 'source': 'Espera', 'dest': 'Espera' },
-    { 'trigger': 'B', 'source': 'Espera', 'dest': 'Contabilidad'},
-    { 'trigger': 'C', 'source': 'Contabilidad', 'dest': 'Paga' },
-    { 'trigger': 'D', 'source': 'Paga', 'dest': 'Paga' }
+    { 'trigger': 'NadaNuevo', 'source': 'Espera', 'dest': 'Espera' },
+    { 'trigger': 'CierreRecibido', 'source': 'Espera', 'dest': 'Contabilidad'},
+    { 'trigger': 'AjustesEnCola', 'source': 'Contabilidad', 'dest': 'Contabilidad'},
+    { 'trigger': 'NumListos', 'source': 'Contabilidad', 'dest': 'Paga' },
+    { 'trigger': 'PagosEnCola', 'source': 'Paga', 'dest': 'Paga' }
 ]
 
 dealer1 = Dealer()
