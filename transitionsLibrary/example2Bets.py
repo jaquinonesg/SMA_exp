@@ -10,27 +10,70 @@ if cmd_folder not in sys.path:
 from transitions import *
 from transitions.extensions import GraphMachine
 
-class BetBase(object):
+class Dealer(object):
     
-    # graph object is created by the machine
     def show_graph(self, **kwargs):
-        self.get_graph(**kwargs).draw('betBase.png', prog='dot')
+        self.get_graph(**kwargs).draw('Agente_Dealer.png', prog='dot')
 
-states=['CreateBet','OpenBet','BetOn','CloseBet','Paying','UpdateLists']
-transitions = [
-    { 'trigger': 'Configure', 'source': 'CreateBet', 'dest': 'OpenBet' },
-    { 'trigger': 'Public', 'source': 'OpenBet', 'dest': 'BetOn'},
-    { 'trigger': 'FinishTime', 'source': 'BetOn', 'dest': 'CloseBet' },
-    { 'trigger': 'ProcessPayment', 'source': 'CloseBet', 'dest': 'Paying' },
-    { 'trigger': 'ProcessResults', 'source': 'Paying', 'dest': 'UpdateLists' }
+class Apertura(object):
+    
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Apertura_Apuestas.png', prog='dot')
+
+class Cierre(object):
+    
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Cierre_Apuestas.png', prog='dot')
+
+class Paga(object):
+    
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('Agente_Paga_Apuestas.png', prog='dot')
+
+
+statesDealer=['Configuracion','ConsultarWS','CreacionApuesta']
+statesApertura=['NuevaApuesta','PublicarConfigurar','AbrirApuesta']
+statesCierre=['BuscarACierre','Actualizar','ComunicarJugadores']
+statesPaga=['Espera','Contabilidad','Paga']
+
+transitionsDealer = [
+    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
+    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
+    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
+    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+]
+transitionsApertura = [
+    { 'trigger': 'RecibeApuesta', 'source': 'NuevaApuesta', 'dest': 'PublicarConfigurar' },
+    { 'trigger': 'ApuestaConfigurada', 'source': 'PublicarConfigurar', 'dest': 'AbrirApuesta'},
+    { 'trigger': 'ApuestaAbierta', 'source': 'AbrirApuesta', 'dest': 'NuevaApuesta' },
+    { 'trigger': 'EApuesta', 'source': 'NuevaApuesta', 'dest': 'NuevaApuesta' }
+]
+transitionsCierre = [
+    { 'trigger': 'ApuestaPorCerrar', 'source': 'BuscarACierre', 'dest': 'Actualizar' },
+    { 'trigger': 'Consolidado', 'source': 'Actualizar', 'dest': 'ComunicarJugadores'},
+    { 'trigger': 'EnCola', 'source': 'ComunicarJugadores', 'dest': 'ComunicarJugadores' },
+    { 'trigger': 'NadaNuevo', 'source': 'BuscarACierre', 'dest': 'BuscarACierre' }
+]
+transitionsPaga = [
+    { 'trigger': 'NadaNuevo', 'source': 'Espera', 'dest': 'Espera' },
+    { 'trigger': 'CierreRecibido', 'source': 'Espera', 'dest': 'Contabilidad'},
+    { 'trigger': 'AjustesEnCola', 'source': 'Contabilidad', 'dest': 'Contabilidad'},
+    { 'trigger': 'NumListos', 'source': 'Contabilidad', 'dest': 'Paga' },
+    { 'trigger': 'PagosEnCola', 'source': 'Paga', 'dest': 'Paga' }
 ]
 
-model = BetBase()
-machine = GraphMachine(model=model, 
-                       states=states, 
-                       transitions=transitions,
-                       initial='CreateBet',
-                       title="Bet",
-                       show_conditions=True)
-model.show_graph()
+dealer1 = Dealer()
+apertura1 = Apertura()
+cierre1 = Cierre()
+paga1 = Paga()
+
+machine1 = GraphMachine(model=dealer1, states=statesDealer, transitions=transitionsDealer,initial=statesDealer[0],title="Agente Dealer", show_conditions=True)
+machine2 = GraphMachine(model=apertura1, states=statesApertura, transitions=transitionsApertura,initial=statesApertura[0],title="Agente Apertura Apuestas", show_conditions=True)
+machine3 = GraphMachine(model=cierre1, states=statesCierre, transitions=transitionsCierre,initial=statesCierre[0],title="Agente Cierre Apuestas", show_conditions=True)
+machine4 = GraphMachine(model=paga1, states=statesPaga, transitions=transitionsPaga,initial=statesPaga[0],title="Agente de Pagos", show_conditions=True)
+
+dealer1.show_graph()
+apertura1.show_graph()
+cierre1.show_graph()
+paga1.show_graph()
 
