@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.defaults import page_not_found
 from .forms import *
 from .ambiente.main import *
+from django.core.files import File
 
 class Gatito():
     def _init_(self):
@@ -140,9 +141,49 @@ class Programacion(TemplateView):
             nombre = request.POST['nombre']
             estado = request.POST['estado']
             transicion = request.POST['transicion']
+            code = """
+import os, sys, inspect
+
+cmd_folder = os.path.realpath(
+    os.path.dirname(
+        os.path.abspath(os.path.split(inspect.getfile( inspect.currentframe() ))[0])))
+
+if cmd_folder not in sys.path:
+    sys.path.insert(0, cmd_folder)
+
+from transitions import *
+from transitions.extensions import GraphMachine
+
+class Agente(object):
+
+    # graph object is created by the machine
+    def show_graph(self, **kwargs):
+        self.get_graph(**kwargs).draw('agente.png', prog='dot')
+
+transitions = """
+            code = code + transicion
+            code = code + """
+states = """
+            code = code + estado
+            code = code + """
+model = Agente()
+machine = GraphMachine(model=model,
+                       states=states,
+                       transitions=transitions,
+                       initial=states[0],
+                       show_auto_transitions=False,
+                       title="""
+            code = code + "'" + nombre + "'"
+            code = code + """,
+                       show_conditions=True)
+model.show_graph()
+"""
+            exec(code)
+            agente.imagen.save('agente.png', File(open('agente.png', 'rb')))
             agente.save()
             self.context['form'] = form
             self.context['creado'] = 'Agente creado exitosamente'
+            self.context['agente'] = agente
             return render(request,self.template_name,self.context)
 
 
