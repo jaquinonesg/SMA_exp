@@ -32,18 +32,47 @@ class Paga(object):
 
 
 statesDealer=['Configuracion','ConsultarWS','CreacionApuesta']
+statesApertura=['NuevasApuesta','PublicarConfigurar','AbrirApuesta']
+statesCierre=['BuscarACierre','Actualizar','ComunicarJugadores']
+statesPaga=['Espera','Contabilidad','Paga']
+
 transitionsDealer = [
     { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
     { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
     { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
     { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
 ]
+transitionsApertura = [
+    { 'trigger': 'RecibeApuesta', 'source': 'NuevaApuesta', 'dest': 'PublicarConfigurar' },
+    { 'trigger': 'ApuestaConfigurada', 'source': 'PublicarConfigurar', 'dest': 'AbrirApuesta'},
+    { 'trigger': 'ApuestaAbierta', 'source': 'AbrirApuesta', 'dest': 'NuevaApuesta' },
+    { 'trigger': 'EApuesta', 'source': 'NuevaApuesta', 'dest': 'NuevaApuesta' }
+]
+transitionsCierre = [
+    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
+    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
+    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
+    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+]
+transitionsPaga = [
+    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
+    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
+    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
+    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+]
+
 dealer1 = Dealer()
-machine1 = GraphMachine(model=dealer1, 
-                       states=statesDealer, 
-                       transitions=transitionsDealer,
-                       initial=statesDealer[0],
-                       title="Agente Dealer",
-                       show_conditions=True)
+apertura1 = Apertura()
+cierre1 = Cierre()
+paga1 = Paga()
+
+machine1 = GraphMachine(model=dealer1, states=statesDealer, transitions=transitionsDealer,initial=statesDealer[0],title="Agente Dealer", show_conditions=True)
+machine2 = GraphMachine(model=apertura1, states=statesApertura, transitions=transitionsApertura,initial=statesApertura[0],title="Agente Apertura Apuestas", show_conditions=True)
+machine3 = GraphMachine(model=cierre1, states=statesCierre, transitions=transitionsCierre,initial=statesCierre[0],title="Agente Cierre Apuestas", show_conditions=True)
+machine4 = GraphMachine(model=paga1, states=statesPaga, transitions=transitionsPaga,initial=statesPaga[0],title="Agente de Pagos", show_conditions=True)
+
 dealer1.show_graph()
+apertura1.show_graph()
+cierre1.show_graph()
+paga1.show_graph()
 
