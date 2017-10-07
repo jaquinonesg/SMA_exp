@@ -16,14 +16,33 @@
 {% block content %}
 
 
-ejemplos
+<h2>Nevera</h2>
+{% if nevera %}
+  {% for nev in nevera %}
+    <b><p>Nombre: Agente para probar temperatura</p></b>
+    <p><b>Estados:</b> {{nev.estado}}</p>
+    <p><b>Transiciones:</b> {{nev.transicion}}</p>
+    <img src="{{ nev.imagen.url }}" style="width:600px"/>
+  {% endfor %}
+{% endif %}
 
-<h2>Apuestas</h2>
+{% if crop %}
+{% for scrop in crop %}
+  <b><p>Nombre: Agente de medición para SmartCrop</p></b>
+  <p><b>Estados:</b> {{scrop.estado}}</p>
+  <p><b>Transiciones:</b> {{scrop.transicion}}</p>
+  <img src="{{ scrop.imagen.url }}" style="width:600px"/>
+{% endfor %}
+{% endif %}
+
+
+
+<h2>Casino</h2>
 {% if apuestas1 %}
   {% for apuesta1 in apuestas1 %}
     <b><p>Nombre: {{apuesta1.nombre}}</p></b>
-    <p>Estados: {{apuesta1.estado}}</p>
-    <p>Transiciones: {{apuesta1.transicion}}</p>
+    <p><b>Estados:</b> {{apuesta1.estado}}</p>
+    <p><b>Transiciones:</b> {{apuesta1.transicion}}</p>
     <img src="{{ apuesta1.imagen.url }}" style="width:600px"/>
   {% endfor %}
 {% endif %}
@@ -31,8 +50,8 @@ ejemplos
 {% if apuestas2 %}
   {% for apuesta2 in apuestas1 %}
     <b><p>Nombre: {{apuesta2.nombre}}</p></b>
-    <p>Estados: {{apuesta2.estado}}</p>
-    <p>Transiciones: {{apuesta2.transicion}}</p>
+    <p><b>Estados:</b> {{apuesta2.estado}}</p>
+    <p><b>Transiciones:</b> {{apuesta2.transicion}}</p>
     <img src="{{ apuesta2.imagen.url }}" style="width:600px"/>
   {% endfor %}
 {% endif %}
@@ -40,8 +59,8 @@ ejemplos
 {% if apuestas3 %}
   {% for apuesta3 in apuestas1 %}
     <b><p>Nombre: {{apuesta3.nombre}}</p></b>
-    <p>Estados: {{apuesta3.estado}}</p>
-    <p>Transiciones: {{apuesta3.transicion}}</p>
+    <p><b>Estados:</b> {{apuesta3.estado}}</p>
+    <p><b>Transiciones:</b> {{apuesta3.transicion}}</p>
     <img src="{{ apuesta3.imagen.url }}" style="width:600px"/>
   {% endfor %}
 {% endif %}
@@ -49,39 +68,22 @@ ejemplos
 {% if apuestas4 %}
   {% for apuesta4 in apuestas1 %}
     <b><p>Nombre: {{apuesta4.nombre}}</p></b>
-    <p>Estados: {{apuesta4.estado}}</p>
-    <p>Transiciones: {{apuesta4.transicion}}</p>
+    <p><b>Estados:</b> {{apuesta4.estado}}</p>
+    <p><b>Transiciones:</b> {{apuesta4.transicion}}</p>
     <img src="{{ apuesta4.imagen.url }}" style="width:600px"/>
   {% endfor %}
 {% endif %}
 
-<h2>Otros</h2>
-{% if nevera %}
-  {% for nev in nevera %}
-    <b><p>Nombre: {{nev.nombre}}</p></b>
-    <p>Estados: {{nev.estado}}</p>
-    <p>Transiciones: {{nev.transicion}}</p>
-    <img src="{{ nev.imagen.url }}" style="width:600px"/>
-  {% endfor %}
-{% endif %}
 
 {% if materia %}
   {% for mat in materia %}
-    <b><p>Nombre: {{mat.nombre}}</p></b>
-    <p>Estados: {{mat.estado}}</p>
-    <p>Transiciones: {{mat.transicion}}</p>
+    <b><p>Nombre: Estados de la materia</p></b>
+    <p><b>Estados:</b> {{mat.estado}}</p>
+    <p><b>Transiciones:</b> {{mat.transicion}}</p>
     <img src="{{ mat.imagen.url }}" style="width:600px"/>
   {% endfor %}
 {% endif %}
 
-{% if crop %}
-  {% for scrop in crop %}
-    <b><p>Nombre: {{scrop.nombre}}</p></b>
-    <p>Estados: {{scrop.estado}}</p>
-    <p>Transiciones: {{scrop.transicion}}</p>
-    <img src="{{ scrop.imagen.url }}" style="width:600px"/>
-  {% endfor %}
-{% endif %}
 
 
 
