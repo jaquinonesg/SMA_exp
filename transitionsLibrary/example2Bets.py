@@ -49,16 +49,16 @@ transitionsApertura = [
     { 'trigger': 'EApuesta', 'source': 'NuevaApuesta', 'dest': 'NuevaApuesta' }
 ]
 transitionsCierre = [
-    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
-    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
-    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
-    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+    { 'trigger': 'A', 'source': 'BuscarACierre', 'dest': 'Actualizar' },
+    { 'trigger': 'B', 'source': 'Actualizar', 'dest': 'ComunicarJugadores'},
+    { 'trigger': 'C', 'source': 'ComunicarJugadores', 'dest': 'ComunicarJugadores' },
+    { 'trigger': 'D', 'source': 'BuscarACierre', 'dest': 'BuscarACierre' }
 ]
 transitionsPaga = [
-    { 'trigger': 'FConfiguracion', 'source': 'Configuracion', 'dest': 'ConsultarWS' },
-    { 'trigger': 'NadaNuevo', 'source': 'ConsultarWS', 'dest': 'ConsultarWS'},
-    { 'trigger': 'NuevaApuesta', 'source': 'ConsultarWS', 'dest': 'CreacionApuesta' },
-    { 'trigger': 'BuscarOtra', 'source': 'CreacionApuesta', 'dest': 'ConsultarWS' }
+    { 'trigger': 'A', 'source': 'Espera', 'dest': 'Espera' },
+    { 'trigger': 'B', 'source': 'Espera', 'dest': 'Contabilidad'},
+    { 'trigger': 'C', 'source': 'Contabilidad', 'dest': 'Paga' },
+    { 'trigger': 'D', 'source': 'Paga', 'dest': 'Paga' }
 ]
 
 dealer1 = Dealer()
