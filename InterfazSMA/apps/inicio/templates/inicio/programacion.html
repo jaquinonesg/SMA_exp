@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'inicio/styles.css' %}">
+{% endblock styles %}
+
+{% block title %}
+    Programación
+{% endblock title %}
+
+{% block header_title %}
+    {% include 'layouts/header_title.html' %}
+{% endblock header_title %}
+
+{% block content %}
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% if creado %}
+<div class="col-xs-6">
+  <div class="col-xs-6 alert alert-info text-center" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong></strong> {{ creado }}
+  </div>
+</div>
+
+{% endif %}
+
+
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'inicio/script.js' %}"></script>
+{% endblock %}
