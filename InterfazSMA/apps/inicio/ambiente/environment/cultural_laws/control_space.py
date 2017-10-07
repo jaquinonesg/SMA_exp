@@ -7,7 +7,7 @@ import sys
 from queue import Queue
 from threading import Thread
 
-from ...environment.communication import *
+#from ...environment.communication import *
 from ...environment.resources import *
 from ...agent_factory.behaviors.social import *
 

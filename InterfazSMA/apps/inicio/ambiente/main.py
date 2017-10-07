@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from .environment.communication.socket_methods import *
+#from .environment.communication.socket_methods import *
 from .environment.world import *
 from .agent_factory.agents.programmed import *
 from .agent_factory.abstract_behavior import *

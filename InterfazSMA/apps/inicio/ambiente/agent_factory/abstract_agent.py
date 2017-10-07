@@ -1,4 +1,4 @@
-from ..environment.communication.socket_methods import *
+#from ..environment.communication.socket_methods import *
 from ..environment.resources.resources import *
 from ..environment.world import *
 import inspect
@@ -55,26 +55,6 @@ class AbstractAgent(threading.Thread):
     def perceive(self):
         pass
 
-    #####################################################################
-
-    def clone(self, address=get_ipv6_interface()):
-        """
-       Copy the agent's code and send it to another environment
-        """
-        from environment.communication.socket_methods import create_message
-        from environment.world import Request
-        try:
-            agent_code = 'from agent_factory.abstract_agent import *\n\n' + '\n' + \
-                         inspect.getsource(self.__class__)
-        except Exception as e:
-            print('[ERROR]' + e)
-            sys.exit(1)
-
-        data = list()
-        data.append(self.name)
-        data.append(agent_code)
-
-        return create_message(address, Request.CLONE, data)
 
     def environment_request(self, address, request, data):
         return create_message(address, request, data)

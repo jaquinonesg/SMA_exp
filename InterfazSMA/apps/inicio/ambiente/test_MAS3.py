@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-from environment.communication.socket_methods import *
+#from environment.communication.socket_methods import *
 from environment.world import Request
 from agent_factory.agents.programmed.Printer3 import *
 

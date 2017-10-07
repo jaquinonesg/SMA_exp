@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 sys.path.append('/Users/jorge/Google Drive/Tlon/SMA/Ambiente/')
-from ..environment.communication.socket_methods import *
+#from ..environment.communication.socket_methods import *
 from ..environment.natural_laws.constants import *
 from ..environment.resources.resources import *
 from ..utilities.utilities import *
