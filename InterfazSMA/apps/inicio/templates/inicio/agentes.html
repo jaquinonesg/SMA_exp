@@ -18,6 +18,15 @@
 
 agentes
 
+{% if agentes %}
+{% for agente in agentes %}
+  <b><p>Nombre: {{agente.nombre}}</p></b>
+  <p><b>Estados:</b> {{agente.estado}}</p>
+  <p><b>Transiciones:</b> {{agente.transicion}}</p>
+  <img src="{{ agente.imagen.url }}" style="width:600px"/>
+{% endfor %}
+{% endif %}
+
 
 
 {% endblock content %}
