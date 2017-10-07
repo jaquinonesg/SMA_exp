@@ -47,6 +47,20 @@ class Ejemplos(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Ejemplos, self).get_context_data(**kwargs)
+        agente = Agente.objects.filter(nombre="Agente_Apertura_Apuestas")
+        context['apuestas1'] = agente
+        agente = Agente.objects.filter(nombre="Agente_Cierre_Apuestas")
+        context['apuestas2'] = agente
+        agente = Agente.objects.filter(nombre="Agente_Dealer")
+        context['apuestas3'] = agente
+        agente = Agente.objects.filter(nombre="Agente_Paga_Apuestas")
+        context['apuestas4'] = agente
+        agente = Agente.objects.filter(nombre="Nevera")
+        context['nevera'] = agente
+        agente = Agente.objects.filter(nombre="Materia")
+        context['materia'] = agente
+        agente = Agente.objects.filter(nombre="SmartCrop")
+        context['crop'] = agente
         return context
 
 class View404(TemplateView):
