@@ -23,3 +23,10 @@ solid = State('solid')
 liquid = State('liquid')
 gas = State('gas')
 machine.add_states([solid, liquid, gas])
+print(machine.states)
+
+#Add another states
+random = State('random')
+machine.add_states([random])
+print(machine.states)
+print(lump.state)

@@ -15,3 +15,5 @@ lump = Matter()
 machine = Machine(lump, states, transitions=transitions, initial='solid')
 lump.melt()
 lump.evaporate()
+
+machine.add_transition(trigger='wake_up', source='asleep', dest='hanging out')

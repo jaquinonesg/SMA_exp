@@ -14,7 +14,10 @@ transitions = [
 ]
 
 machine = Machine(lump, states=['A', 'B', 'C'], transitions=transitions, initial='A')
-
-lump.state
-lump.passA()
 print(machine.get_state(lump.state).name)
+
+file = open("testfile.txt", "r")
+for line in file:
+    print(line.strip())
+    eval(line.strip())
+file.close()
