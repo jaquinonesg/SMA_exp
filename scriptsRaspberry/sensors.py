@@ -5,6 +5,8 @@ import socket, datetime, gps, sys, time, Adafruit_DHT, requests
 session = gps.gps("localhost", "2947")
 session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
 sensor = Adafruit_DHT.DHT11
+hostname = socket.gethostname()
+
 pin = 23
 lat = 0
 lon = 0
@@ -34,11 +36,18 @@ def gps():
    if hasattr(report, 'head'):
     print report.head
    x= 0
+
+def ping(host):
+    parameters = "-n 1" if system_name().lower()=="windows" else "-c 1"
+    return system_call("ping " + parameters + " " + host) == 0
+
  
 try:
 	# Ciclo principal infinito
 	while True:
 		humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
+		ping_server = ping("www.bitsobet.com")
+		ping google = ping("google.com")
 		gps()
 		r = requests.post("http://www.bitsobet.com/maps/", data={'temp': temperatura, 'hum': humedad, 'longitud' : lon, 'latitud' : lat, 'humsuelo' : 0, 'precipitacion' : 6, 'datemed' : time})
 
