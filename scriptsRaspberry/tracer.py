@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 import socket
  
@@ -43,4 +42,4 @@ def traceroute(hostname, port, max_hops):
             break
  
 if __name__ == "__main__":
-    traceroute(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]
+    traceroute(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
