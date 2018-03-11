@@ -1,2 +1,0 @@
-lump.state
-lump.passA()
