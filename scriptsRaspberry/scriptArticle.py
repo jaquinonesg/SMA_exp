@@ -15,10 +15,14 @@ hora latitud longitud humedad temperatura hostname resultadoping fullping tracer
 3 archivos: todos los datos, enviados a servicio, perdidos
 """
 
+a = 1
+b = "xx"
+x = 1.0000001
+c = True
+
+all_data.write(str(a) + " " + str(b) + " " + str(x) + " " + str(c) + "\n")
 #hostname
 #file.write(socket.gethostname() + '\n')
-
-
 #print(ping("google.com"))
 
 all_data.close()

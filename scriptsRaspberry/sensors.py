@@ -82,17 +82,28 @@ def ping(host):
     parameters = "-n 1" if system_name().lower()=="windows" else "-c 1"
     return system_call("ping " + parameters + " " + host) == 0
 
- 
+all_data = open('all_data.txt', 'a')
+lost_data = open('lost_data.txt', 'a')
+send_data = open('send_data.txt', 'a')
+
 try:
-	# Ciclo principal infinito
-	while True:
+	counter = 0
+	while counter < 100:
 		humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
 		ping_server = ping("www.bitsobet.com")
-		ping google = ping("google.com")
+		ping_google = ping("google.com")
 		gps()
+		all_data.write(str(time) + " " + str(lat) + " " + str(lon) + " " + str(humedad) + " " + str(temperatura) + " " + str(hostname) + " " + str(ping_server) + " " + str(ping_google) + "\n")
 		r = requests.post("http://www.bitsobet.com/maps/", data={'temp': temperatura, 'hum': humedad, 'longitud' : lon, 'latitud' : lat, 'humsuelo' : 0, 'precipitacion' : 6, 'datemed' : time})
+		if r.status_code == 200:
+			send_data.write(str(time) + " " + str(lat) + " " + str(lon) + " " + str(humedad) + " " + str(temperatura) + " " + str(hostname) + " " + str(ping_server) + " " + str(ping_google) + "\n")
+		else:
+			lost_data.write(str(time) + " " + str(lat) + " " + str(lon) + " " + str(humedad) + " " + str(temperatura) + " " + str(hostname) + " " + str(ping_server) + " " + str(ping_google) + "\n")
+		counter += 1
+	all_data.close()
+	lost_data.close()
+	send_data.close()
 
-# Se ejecuta en caso de que falle alguna instruccion dentro del try
 except Exception,e:
-	# Imprime en pantalla el error e
 	print str(e)
+
